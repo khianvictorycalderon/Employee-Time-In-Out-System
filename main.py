@@ -25,7 +25,7 @@ screen_height = app.winfo_screenheight()
 app.geometry(f"{screen_width}x{screen_height}+0+0")
 app.update()
 app.state("zoomed")
-# app.iconbitmap("./Icons/ETIOS.ico")
+app.iconbitmap("./Icons/ETIOS.ico")
 app.title("Employee Time In Out System")
 
 # Ensure that everything works correctly:
