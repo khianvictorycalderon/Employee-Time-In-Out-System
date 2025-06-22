@@ -48,7 +48,7 @@ frame_content = {
     }
 }
 
-dual_frame = create_dual_frame(app, frame_content, left_frame_bg_color=color_1, right_frame_bg_color=color_2, button_hover_color=color_3, left_frame_font=font_3)
+dual_frame = create_dual_frame(app, frame_content, left_frame_bg_color=color_1, right_frame_bg_color=color_2, button_hover_color=color_3, left_frame_font=font_2)
 dual_frame.pack(expand = True, fill = BOTH)
 
 app.mainloop()
