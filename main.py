@@ -13,6 +13,9 @@ from global_var import * # db_path
 from ctk_temp_dual_frame import create_dual_frame
 
 # Pages
+from page_time_in_out import time_in_out_page
+from page_logs import logs_page
+from page_employees import employees_page
 from page_credits import credits_page
 
 app = ctk.CTk()
@@ -26,9 +29,9 @@ app.title("Employee Time In Out System")
 
 frame_content = {
     "Employee & Logs": {
-        "Time In / Out": lambda _: print(),
-        "Logs": lambda _: print(),
-        "Employees": lambda _: print()
+        "Time In / Out": time_in_out_page,
+        "Logs": logs_page,
+        "Employees": employees_page
     },
     "Misc": {
         "Credits": credits_page,
