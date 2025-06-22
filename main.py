@@ -1,7 +1,6 @@
 # Main entry point of the program, run this .py file
 from tkinter import *
 import customtkinter as ctk
-from tkinter import messagebox
 import sys
 
 # Defaults
