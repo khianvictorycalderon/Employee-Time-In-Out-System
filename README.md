@@ -18,3 +18,5 @@ Designed for small offices or demo environments, this system helps monitor emplo
 2. Launch the application.
 3. Add employees and log their time in/out.
 4. View logs and manage data through a user-friendly interface.
+
+![Preview Image](preview.png)
