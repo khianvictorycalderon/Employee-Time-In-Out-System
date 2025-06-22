@@ -1,4 +1,20 @@
-# Employee Time In Out System
+# Employee Time In Out System  
 ## System by Khian Victory D. Calderon
 
-A simple python project with installer (in the Installer folder) that keeps track of the employee's time in and out and the date.
+A simple Python-based system that tracks employee time in and time out along with the date.
+
+## Purpose
+Designed for small offices or demo environments, this system helps monitor employee attendance without the need for complex databases. Data is stored in Excel files for easy access and portability.
+
+## Features
+- Time In / Time Out logging
+- View attendance logs
+- Add and manage employees
+- Excel-based data storage
+- Simple and clean GUI using CustomTkinter
+
+## Usage
+1. Run the installer inside the `Installer` folder.
+2. Launch the application.
+3. Add employees and log their time in/out.
+4. View logs and manage data through a user-friendly interface.
