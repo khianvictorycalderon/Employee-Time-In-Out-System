@@ -29,35 +29,35 @@ def opxl_insert(file_path, sheet_name, data):
     print(f"Data inserted successfully into '{sheet_name}'.")
     
 
-# Sample usage:
+# # Sample usage:
 
-db = "sample.xlsx"
-sheet = "Sample_Sheet"
+# db = "sample.xlsx"
+# sheet = "Sample_Sheet"
 
-data = ["John", "Doe", "Male", 17, "Brooklyn Street"]
+# data = ["John", "Doe", "Male", 17, "Brooklyn Street"]
 
-data2 = [
-    ["Maria", "Currey", "Female", 18, "Brooklyn Street"],
-    ["Jane", "Doe", "Female", 20, "Brooklyn Street"],
-    ["Michael", "Smith", "Male", 25, "5th Avenue"],
-    ["Emily", "Johnson", "Female", 22, "Main Street"],
-    ["David", "Williams", "Male", 30, "Oak Lane"],
-    ["Sarah", "Brown", "Female", 27, "Pine Road"],
-    ["James", "Jones", "Male", 35, "Maple Drive"],
-    ["Linda", "Garcia", "Female", 28, "Cedar Street"],
-    ["Robert", "Martinez", "Male", 40, "Elm Avenue"],
-    ["Patricia", "Rodriguez", "Female", 26, "Birch Boulevard"],
-    ["Charles", "Wilson", "Male", 33, "Chestnut Street"],
-    ["Barbara", "Lee", "Female", 24, "Spruce Court"],
-    ["Joseph", "Walker", "Male", 29, "Willow Way"],
-    ["Susan", "Hall", "Female", 31, "Poplar Street"],
-    ["Thomas", "Allen", "Male", 38, "Sycamore Road"],
-    ["Jessica", "Young", "Female", 21, "Magnolia Lane"],
-    ["Daniel", "Hernandez", "Male", 36, "Aspen Drive"],
-    ["Karen", "King", "Female", 23, "Fir Street"],
-    ["Matthew", "Wright", "Male", 34, "Hawthorn Avenue"],
-    ["Nancy", "Lopez", "Female", 19, "Dogwood Circle"]
-]
+# data2 = [
+#     ["Maria", "Currey", "Female", 18, "Brooklyn Street"],
+#     ["Jane", "Doe", "Female", 20, "Brooklyn Street"],
+#     ["Michael", "Smith", "Male", 25, "5th Avenue"],
+#     ["Emily", "Johnson", "Female", 22, "Main Street"],
+#     ["David", "Williams", "Male", 30, "Oak Lane"],
+#     ["Sarah", "Brown", "Female", 27, "Pine Road"],
+#     ["James", "Jones", "Male", 35, "Maple Drive"],
+#     ["Linda", "Garcia", "Female", 28, "Cedar Street"],
+#     ["Robert", "Martinez", "Male", 40, "Elm Avenue"],
+#     ["Patricia", "Rodriguez", "Female", 26, "Birch Boulevard"],
+#     ["Charles", "Wilson", "Male", 33, "Chestnut Street"],
+#     ["Barbara", "Lee", "Female", 24, "Spruce Court"],
+#     ["Joseph", "Walker", "Male", 29, "Willow Way"],
+#     ["Susan", "Hall", "Female", 31, "Poplar Street"],
+#     ["Thomas", "Allen", "Male", 38, "Sycamore Road"],
+#     ["Jessica", "Young", "Female", 21, "Magnolia Lane"],
+#     ["Daniel", "Hernandez", "Male", 36, "Aspen Drive"],
+#     ["Karen", "King", "Female", 23, "Fir Street"],
+#     ["Matthew", "Wright", "Male", 34, "Hawthorn Avenue"],
+#     ["Nancy", "Lopez", "Female", 19, "Dogwood Circle"]
+# ]
 
-opxl_insert(db, sheet, data)
-opxl_insert(db, sheet, data2)
+# opxl_insert(db, sheet, data)
+# opxl_insert(db, sheet, data2)

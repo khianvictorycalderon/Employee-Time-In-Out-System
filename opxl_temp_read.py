@@ -46,15 +46,15 @@ def opxl_read(file_path, sheet_name, columns=None, condition=None):
 
     return data
 
-# Sample Usage
+# # Sample Usage
 
-db = "sample.xlsx"
-sheet = "Sample_Sheet"
+# db = "sample.xlsx"
+# sheet = "Sample_Sheet"
 
-read_data = opxl_read(db, sheet)
-for row in read_data:
-    print(row)
+# read_data = opxl_read(db, sheet)
+# for row in read_data:
+#     print(row)
     
-read_data_fixed_columns = opxl_read(db, sheet, condition={"First Name":"John", "Gender": "Male"}, columns=["Age", "Address"])
-for row in read_data_fixed_columns:
-    print(row)
+# read_data_fixed_columns = opxl_read(db, sheet, condition={"First Name":"John", "Gender": "Male"}, columns=["Age", "Address"])
+# for row in read_data_fixed_columns:
+#     print(row)

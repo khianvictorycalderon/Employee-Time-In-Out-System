@@ -24,10 +24,10 @@ def opxl_write_headers(file_path, sheet_name, headers):
     return "Headers updated successfully."
 
 
-# Sample Usage
-db = "sample.xlsx"
-sheet = "Sample_Sheet"
-headers = ["First Name", "Last Name", "Gender", "Age", "Address"]
+# # Sample Usage
+# db = "sample.xlsx"
+# sheet = "Sample_Sheet"
+# headers = ["First Name", "Last Name", "Gender", "Age", "Address"]
 
-result = opxl_write_headers(db, sheet, headers)
-print(result)
+# result = opxl_write_headers(db, sheet, headers)
+# print(result)
