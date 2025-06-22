@@ -9,6 +9,8 @@ from fonts import * # font_1, font_2, up to font_4
 from global_var import * # db_path
 
 # Templates
+from opxl_temp_ensures import * # ensure_excel_exist, ensure_sheet_exist, and remove_sheet
+from opxl_temp_headers import opxl_write_headers
 from ctk_temp_dual_frame import create_dual_frame
 
 # Pages
@@ -25,6 +27,13 @@ app.update()
 app.state("zoomed")
 # app.iconbitmap("./Icons/ETIOS.ico")
 app.title("Employee Time In Out System")
+
+# Ensure that everything works correctly:
+ensure_excel_exist(db_path)
+ensure_sheet_exist(db_path, employee_sheet)
+opxl_write_headers(db_path, employee_sheet, headers=["ID", "Employee Name"])
+ensure_sheet_exist(db_path, log_sheet)
+opxl_write_headers(db_path, log_sheet, headers=["Status", "Employee", "Time", "Date"])
 
 frame_content = {
     "Employee & Logs": {
