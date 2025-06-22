@@ -1,0 +1,42 @@
+# Main entry point of the program, run this .py file
+from tkinter import *
+import customtkinter as ctk
+from tkinter import messagebox
+import sys
+
+# Defaults
+from colors import * # color_1, color_2, up to color_6
+from fonts import * # font_1, font_2, up to font_4
+from global_var import * # db_path
+
+# Templates
+from ctk_temp_dual_frame import create_dual_frame
+
+# Pages
+from page_credits import credits_page
+
+app = ctk.CTk()
+screen_width = app.winfo_screenwidth()
+screen_height = app.winfo_screenheight()
+app.geometry(f"{screen_width}x{screen_height}+0+0")
+app.update()
+app.state("zoomed")
+# app.iconbitmap("./Icons/ETIOS.ico")
+app.title("Employee Time In Out System")
+
+frame_content = {
+    "Employee & Logs": {
+        "Time In / Out": lambda _: print(),
+        "Logs": lambda _: print(),
+        "Employees": lambda _: print()
+    },
+    "Misc": {
+        "Credits": credits_page,
+        "Quit": lambda _: sys.exit()
+    }
+}
+
+dual_frame = create_dual_frame(app, frame_content, left_frame_bg_color=color_1, right_frame_bg_color=color_2, button_hover_color=color_3, left_frame_font=font_3)
+dual_frame.pack(expand = True, fill = BOTH)
+
+app.mainloop()

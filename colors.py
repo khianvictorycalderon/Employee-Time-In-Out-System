@@ -1,0 +1,6 @@
+color_1 = "#212529"
+color_2 = "#343a40"
+color_3 = "#495057"
+color_4 = "#6c757d"
+color_5 = "#adb5bd"
+color_6 = "#e9ecef"
