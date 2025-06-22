@@ -33,7 +33,7 @@ ensure_excel_exist(db_path)
 ensure_sheet_exist(db_path, employee_sheet)
 opxl_write_headers(db_path, employee_sheet, headers=["ID", "Employee Name"])
 ensure_sheet_exist(db_path, log_sheet)
-opxl_write_headers(db_path, log_sheet, headers=["Status", "Employee", "Time", "Date"])
+opxl_write_headers(db_path, log_sheet, headers=["Status", "Employee ID", "Time", "Date"])
 remove_sheet(db_path, "Sheet")
 
 frame_content = {
