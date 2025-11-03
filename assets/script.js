@@ -238,6 +238,7 @@ function onLoad() {
   buttons.forEach(item => {
     const btn = document.createElement("button");
     btn.textContent = item.label;
+    btn.dataset.page = item.page; // store page
     btn.className = "w-full p-2 text-left text-white hover:bg-neutral-700 transition text-center";
     btn.addEventListener("click", () => {
       history.pushState({ page: item.page }, "", `?page=${item.page}`);
@@ -489,9 +490,8 @@ function bindClearData(){
 // ================== NAVBAR ==================
 function highlightActiveButton(activePage){
   const navbar = document.getElementById("navbar");
-  Array.from(navbar.children).forEach((btn,i)=>{
-    const pages=["time","logs","employees","credits"];
-    btn.classList.toggle("bg-neutral-700", pages[i]===activePage);
+  Array.from(navbar.children).forEach(btn => {
+    btn.classList.toggle("bg-neutral-700", btn.dataset.page === activePage);
   });
 }
 
