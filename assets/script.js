@@ -90,8 +90,7 @@ const pageLogsContent = `
 const pageEmployeesContent = `
   <section class="max-w-4xl mx-auto p-6 text-gray-200">
     <h2 class="text-3xl font-semibold mb-4 text-center">👥 Employees</h2>
-    <p class="text-center mb-8 text-lg">Manage your employees here.</p>
-
+    
     <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
       <!-- Header Row -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 font-semibold text-gray-100 mb-4">
