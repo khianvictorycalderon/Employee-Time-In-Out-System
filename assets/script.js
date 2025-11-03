@@ -351,11 +351,14 @@ function renderLogsTable() {
 function bindLogExports() {
   document.getElementById("exportLogsCSV").addEventListener("click", ()=>{
     const logs = getLocalData("etiosLogs", []).map(({id,status,time,date})=>({id,status,time,date}));
-    downloadFile("etios_logs.csv", toCSV(logs));
+    const filename = `etios_logs_${getTimestamp()}.csv`;
+    downloadFile(filename, toCSV(logs));
   });
+
   document.getElementById("exportLogsJSON").addEventListener("click", ()=>{
     const logs = getLocalData("etiosLogs", []).map(({id,status,time,date})=>({id,status,time,date}));
-    downloadFile("etios_logs.json", JSON.stringify(logs,null,2));
+    const filename = `etios_logs_${getTimestamp()}.json`;
+    downloadFile(filename, JSON.stringify(logs,null,2));
   });
   document.getElementById("importLogsBtn").addEventListener("click", () => {
     importFile((data) => {
@@ -454,11 +457,14 @@ function bindEmployeeEvents(){
 function bindEmployeeExports(){
   document.getElementById("exportEmpCSV").addEventListener("click", ()=>{
     const employees = getLocalData("etiosEmployees", []);
-    downloadFile("etios_employees.csv", toCSV(employees));
+    const filename = `etios_employees_${getTimestamp()}.csv`;
+    downloadFile(filename, toCSV(employees));
   });
+
   document.getElementById("exportEmpJSON").addEventListener("click", ()=>{
     const employees = getLocalData("etiosEmployees", []);
-    downloadFile("etios_employees.json", JSON.stringify(employees,null,2));
+    const filename = `etios_employees_${getTimestamp()}.json`;
+    downloadFile(filename, JSON.stringify(employees,null,2));
   });
   document.getElementById("importEmpBtn").addEventListener("click", () => {
     importFile((data) => {
