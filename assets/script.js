@@ -1,3 +1,5 @@
+var menuOpen = false;
+
 function onLoad() {
   const buttons = [
     { label: "Time In / Out", page: "time" },
@@ -58,6 +60,19 @@ function onLoad() {
       default:
         content.innerHTML = `<h1 class="text-2xl p-4">🕒 Time In / Out</h1><p class="p-4">Record employee attendance here.</p>`;
     }
+
+    // Close the navbar
+    if (window.innerWidth < 1024) {
+      document.getElementById("navbar").className = "hidden lg:hidden lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8 fixed w-full";
+      document.getElementById("menu-button").innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      `;
+      menuOpen = false;
+    }
+
   }
 
   // Function: highlight active button
@@ -66,5 +81,30 @@ function onLoad() {
       const btnPage = buttons[i].page;
       btn.classList.toggle("bg-neutral-700", btnPage === activePage);
     });
+  }
+}
+
+function handleMenuButton() {
+
+  // Toggle
+  menuOpen = !menuOpen;
+
+  if (menuOpen) {
+    document.getElementById("navbar").className = "block lg:hidden lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8 fixed w-full";
+    document.getElementById("menu-button").innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    `;
+  } else {
+    document.getElementById("navbar").className = "hidden lg:hidden lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8 fixed w-full";
+    document.getElementById("menu-button").innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke-width="2" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    `;
   }
 }
