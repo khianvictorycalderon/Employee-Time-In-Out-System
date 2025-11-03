@@ -20,11 +20,12 @@
     <script src="assets/script.js"></script>
     <title>Employee Time In Out System</title>
   </head>
-  <body class="text-white">
+  <body class="text-white" onload="onLoad();">
 
     <div class="flex flex-col lg:flex-row h-screen w-screen">
+      <!-- This acts like the navigation bar -->
       <section class="h-full bg-neutral-900 basis-1/4 overflow-auto">
-        Left Panel
+        <div class="flex flex-col gap-4 mt-8" id="navbar"></div>
       </section>
       <section class="h-full bg-neutral-800 basis-3/4 overflow-auto">
         Right Panel<br/>
