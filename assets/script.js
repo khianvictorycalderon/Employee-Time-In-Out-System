@@ -29,8 +29,63 @@ const pageTimeInOutContent = `
   </section>
 `;
 const pageLogsContent = `
-  <h2 class="text-2xl p-4">🗂 Logs</h2>
-  <p class="p-4">Here you can view employee log records.</p>
+  <section class="max-w-5xl mx-auto p-6 text-gray-200">
+    <h2 class="text-3xl font-semibold mb-4 text-center">🗂 Logs</h2>
+
+    <div class="flex flex-wrap justify-center gap-4 mb-6">
+      <button
+        id="exportCsvBtn"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-xl transition-all duration-200"
+      >
+        Export Logs to .csv
+      </button>
+      <button
+        id="exportJsonBtn"
+        class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-2 rounded-xl transition-all duration-200"
+      >
+        Export Logs to .json
+      </button>
+      <label
+        for="importLogsInput"
+        class="cursor-pointer bg-amber-600 hover:bg-amber-700 text-white font-semibold px-5 py-2 rounded-xl transition-all duration-200"
+      >
+        Import Logs (.csv or .json)
+      </label>
+      <input
+        id="importLogsInput"
+        type="file"
+        accept=".csv, .json"
+        class="hidden"
+      />
+    </div>
+
+    <div class="overflow-x-auto bg-white/10 backdrop-blur-md rounded-2xl shadow-md">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-white/20 text-gray-100">
+          <tr>
+            <th class="py-3 px-4 text-sm font-semibold uppercase tracking-wide">Status</th>
+            <th class="py-3 px-4 text-sm font-semibold uppercase tracking-wide">Employee Name</th>
+            <th class="py-3 px-4 text-sm font-semibold uppercase tracking-wide">Time</th>
+            <th class="py-3 px-4 text-sm font-semibold uppercase tracking-wide">Date</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/10 text-gray-200">
+          <tr class="hover:bg-white/10 transition-colors duration-150">
+            <td class="py-3 px-4">Time In</td>
+            <td class="py-3 px-4">John Doe</td>
+            <td class="py-3 px-4">08:00 AM</td>
+            <td class="py-3 px-4">Nov 3, 2025</td>
+          </tr>
+          <tr class="hover:bg-white/10 transition-colors duration-150">
+            <td class="py-3 px-4">Time Out</td>
+            <td class="py-3 px-4">Jane Smith</td>
+            <td class="py-3 px-4">05:15 PM</td>
+            <td class="py-3 px-4">Nov 3, 2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 `;
 const pageEmployeesContent = `
   <h2 class="text-2xl p-4">👥 Employees</h2>
