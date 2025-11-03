@@ -37,36 +37,45 @@ const pageEmployeesContent = `
   <p class="p-4">Manage your employees here.</p>
 `;
 const pageCreditsContent = `
-  <h2 class="text-2xl p-4">💳 Credits</h2>
-  <p class="px-4">
-    Website Developed by
-    <a 
-      title="Khian's Official Website"
-      href="https://khian.netlify.app" 
-      target="_blank"
-      class="text-blue-600 underline cursor-pointer"
-      >Khian Victory D. Calderon</a>
-  </p>
-  <br/>
-  <p class="px-4">
-    Made using vanilla technologies:
-    <ul class="px-8 list-disc">
-      <li>HTML</li>
-      <li>Tailwind CSS</li>
-      <li>JavaScript</li>
-    </ul>
-  </p>
-  <br/>
-  <p class="px-4">
-    A web version of my previous ETIOS project, made in python for Desktop. For detials about my previous project, click
-    <a 
-      title="ETIOS Original & Desktop Version"
-      href="https://github.com/khianvictorycalderon/Employee-Time-In-Out-System-Desktop" 
-      target="_blank"
-      class="text-blue-600 underline cursor-pointer"
-      >here</a>
-    .
-  </p>
+  <section class="max-w-2xl mx-auto p-6 text-gray-200">
+    <h2 class="text-3xl font-semibold mb-4 text-center">💳 Credits</h2>
+
+    <div class="space-y-6 bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
+      <p class="text-lg leading-relaxed">
+        Website developed by
+        <a
+          href="https://khian.netlify.app"
+          target="_blank"
+          title="Khian's Official Website"
+          class="text-blue-400 hover:text-blue-300 font-semibold underline underline-offset-2 transition-colors duration-200"
+        >
+          Khian Victory D. Calderon
+        </a>.
+      </p>
+
+      <div>
+        <h3 class="text-xl font-medium mb-2">🛠️ Built With</h3>
+        <ul class="list-disc list-inside text-lg text-gray-100 space-y-1">
+          <li>HTML</li>
+          <li>Tailwind CSS</li>
+          <li>JavaScript (Vanilla)</li>
+        </ul>
+      </div>
+
+      <p class="text-lg leading-relaxed">
+        This is the web version of my previous <strong>ETIOS</strong> desktop project made in Python.
+        Learn more about it
+        <a
+          href="https://github.com/khianvictorycalderon/Employee-Time-In-Out-System-Desktop"
+          target="_blank"
+          title="ETIOS Original & Desktop Version"
+          class="text-blue-400 hover:text-blue-300 font-semibold underline underline-offset-2 transition-colors duration-200"
+        >
+          here
+        </a>.
+      </p>
+    </div>
+  </section>
 `;
 
 // Misc Functions
