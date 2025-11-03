@@ -88,8 +88,64 @@ const pageLogsContent = `
   </section>
 `;
 const pageEmployeesContent = `
-  <h2 class="text-2xl p-4">👥 Employees</h2>
-  <p class="p-4">Manage your employees here.</p>
+  <section class="max-w-4xl mx-auto p-6 text-gray-200">
+    <h2 class="text-3xl font-semibold mb-4 text-center">👥 Employees</h2>
+    <p class="text-center mb-8 text-lg">Manage your employees here.</p>
+
+    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
+      <!-- Header Row -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 font-semibold text-gray-100 mb-4">
+        <div>ID</div>
+        <div>Employee Name</div>
+        <div class="hidden md:block"></div>
+      </div>
+
+      <!-- Employee Rows -->
+      <div class="space-y-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="AC10001" class="p-2 rounded text-black w-full" />
+          <input type="text" value="John Doe" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="AC10002" class="p-2 rounded text-black w-full" />
+          <input type="text" value="Jane Doe" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="AC10003" class="p-2 rounded text-black w-full" />
+          <input type="text" value="Aldo Zia" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="AC10004" class="p-2 rounded text-black w-full" />
+          <input type="text" value="Robert Cruz" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="AC10005" class="p-2 rounded text-black w-full" />
+          <input type="text" value="Frank Vor" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="12345" class="p-2 rounded text-black w-full" />
+          <input type="text" value="Khian Calderon" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+          <input type="text" value="12346" class="p-2 rounded text-black w-full" />
+          <input type="text" value="Allysa Castro" class="p-2 rounded text-black w-full" />
+          <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="flex justify-center gap-4 mt-6">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-8 rounded-md">Save</button>
+        <button class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-8 rounded-md">Cancel</button>
+      </div>
+    </div>
+  </section>
 `;
 const pageCreditsContent = `
   <section class="max-w-2xl mx-auto p-6 text-gray-200">
