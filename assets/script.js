@@ -36,6 +36,7 @@ const pageLogsContent = `
     <button id="exportLogsCSV" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
     <button id="exportLogsJSON" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
     <button id="importLogsBtn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Logs</button>
+    <button id="clearLogsBtn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Clear Logs</button>
   </div>
 
   <div class="overflow-x-auto bg-white/10 backdrop-blur-md rounded-2xl shadow-md">
@@ -214,7 +215,7 @@ function onLoad() {
 function loadPage(page) {
   const content = document.getElementById("content");
   switch(page){
-    case "logs": content.innerHTML = pageLogsContent; renderLogsTable(); bindLogExports(); break;
+    case "logs": content.innerHTML = pageLogsContent; renderLogsTable(); bindLogExports(); bindClearLogs(); break;
     case "employees": content.innerHTML = pageEmployeesContent; renderEmployeesList(); bindEmployeeEvents(); bindEmployeeExports(); break;
     case "credits": content.innerHTML = pageCreditsContent; bindClearData(); break;
     default: content.innerHTML = pageTimeInOutContent; bindTimeForm();
@@ -258,6 +259,19 @@ function bindTimeForm() {
 }
 
 // ================== LOGS ==================
+function bindClearLogs() {
+  const btn = document.getElementById("clearLogsBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete ALL logs?")) {
+      localStorage.setItem("etiosLogs", JSON.stringify([])); // clear only logs
+      localStorage.setItem("etiosActive", JSON.stringify([])); // optionally clear active sessions too
+      alert("All logs cleared!");
+      renderLogsTable();
+    }
+  });
+}
 function renderLogsTable() {
   const logs = getLocalData("etiosLogs", []);
   const tbody = document.getElementById("logsTableBody");
