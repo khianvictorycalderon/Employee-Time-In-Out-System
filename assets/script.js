@@ -178,7 +178,7 @@ function getTimestamp() {
   const yyyy = now.getFullYear();                         // year
   const hh = String(now.getHours()).padStart(2, '0');     // hour
   const min = String(now.getMinutes()).padStart(2, '0');  // minutes
-  return `${mm}-${dd}-${yyyy}-${hh}:${min}`;
+  return `${mm}-${dd}-${yyyy}-${hh}-${min}`;
 }
 function getLocalData(key, fallback) {
   try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
