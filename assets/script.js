@@ -2,8 +2,31 @@ var menuOpen = false;
 
 // Pages
 const pageTimeInOutContent = `
-  <h1 class="text-2xl p-4">🕒 Time In / Out</h1>
-  <p class="p-4">Record employee attendance here.</p>
+  <section class="p-6 max-w-md mx-auto text-center">
+    <h1 class="text-3xl font-semibold mb-6">🕒 Time In / Out</h1>
+
+    <form class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-6">
+      <div class="space-y-3">
+        <label for="employeeId" class="block text-lg font-medium text-gray-100">
+          Employee ID
+        </label>
+        <input
+          id="employeeId"
+          name="employeeId"
+          type="text"
+          placeholder="Enter your ID..."
+          class="w-full p-3 text-black rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all duration-200"
+      >
+        Log
+      </button>
+    </form>
+  </section>
 `;
 const pageLogsContent = `
   <h2 class="text-2xl p-4">🗂 Logs</h2>
