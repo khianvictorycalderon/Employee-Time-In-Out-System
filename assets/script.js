@@ -169,7 +169,7 @@ function handleMenuButton() {
   menuOpen = !menuOpen;
 
   if (menuOpen) {
-    document.getElementById("navbar").className = "block lg:hidden lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8 fixed w-full";
+    document.getElementById("navbar").className = "block lg:hidden lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8 fixed w-full z-40";
     document.getElementById("menu-button").innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
