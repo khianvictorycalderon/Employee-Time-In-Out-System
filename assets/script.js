@@ -1,8 +1,27 @@
 var menuOpen = false;
 
+// Pages
+const pageTimeInOutContent = `
+  <h1 class="text-2xl p-4">🕒 Time In / Out</h1>
+  <p class="p-4">Record employee attendance here.</p>
+`;
+const pageLogsContent = `
+  <h2 class="text-2xl p-4">🗂 Logs</h2>
+  <p class="p-4">Here you can view employee log records.</p>
+`;
+const pageEmployeesContent = `
+  <h2 class="text-2xl p-4">👥 Employees</h2>
+  <p class="p-4">Manage your employees here.</p>
+`;
+const pageCreditsContent = `
+  <h2 class="text-2xl p-4">💳 Credits</h2>
+  <p class="p-4">Developed by your amazing team!</p>
+`;
+
+// Misc Functions
 function onLoad() {
   const buttons = [
-    { label: "Time In / Out", page: "time" },
+    { label: "Time In / Out", page: "default" },
     { label: "Logs", page: "logs" },
     { label: "Employees", page: "employees" },
     { label: "Credits", page: "credits" },
@@ -49,16 +68,16 @@ function onLoad() {
   function loadPage(page) {
     switch (page) {
       case "logs":
-        content.innerHTML = `<h1 class="text-2xl p-4">🗂 Logs</h1><p class="p-4">Here you can view employee log records.</p>`;
+        content.innerHTML = pageLogsContent;
         break;
       case "employees":
-        content.innerHTML = `<h1 class="text-2xl p-4">👥 Employees</h1><p class="p-4">Manage your employees here.</p>`;
+        content.innerHTML = pageEmployeesContent;
         break;
       case "credits":
-        content.innerHTML = `<h1 class="text-2xl p-4">💳 Credits</h1><p class="p-4">Developed by your amazing team!</p>`;
+        content.innerHTML = pageCreditsContent;
         break;
       default:
-        content.innerHTML = `<h1 class="text-2xl p-4">🕒 Time In / Out</h1><p class="p-4">Record employee attendance here.</p>`;
+        content.innerHTML = pageTimeInOutContent;
     }
 
     // Close the navbar
