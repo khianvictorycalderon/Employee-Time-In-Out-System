@@ -15,7 +15,35 @@ const pageEmployeesContent = `
 `;
 const pageCreditsContent = `
   <h2 class="text-2xl p-4">💳 Credits</h2>
-  <p class="p-4">Developed by your amazing team!</p>
+  <p class="px-4">
+    Website Developed by
+    <a 
+      title="Khian's Official Website"
+      href="https://khian.netlify.app" 
+      target="_blank"
+      class="text-blue-600 underline cursor-pointer"
+      >Khian Victory D. Calderon</a>
+  </p>
+  <br/>
+  <p class="px-4">
+    Made using vanilla technologies:
+    <ul class="px-8 list-disc">
+      <li>HTML</li>
+      <li>Tailwind CSS</li>
+      <li>JavaScript</li>
+    </ul>
+  </p>
+  <br/>
+  <p class="px-4">
+    A web version of my previous ETIOS project, made in python for Desktop. For detials about my previous project, click
+    <a 
+      title="ETIOS Original & Desktop Version"
+      href="https://github.com/khianvictorycalderon/Employee-Time-In-Out-System-Desktop" 
+      target="_blank"
+      class="text-blue-600 underline cursor-pointer"
+      >here</a>
+    .
+  </p>
 `;
 
 // Misc Functions
