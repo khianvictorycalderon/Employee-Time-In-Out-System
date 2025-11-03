@@ -21,7 +21,7 @@ function onLoad() {
   buttons.forEach(item => {
     const btn = document.createElement("button");
     btn.textContent = item.label;
-    btn.className = "w-full p-2 rounded text-left text-white hover:bg-neutral-700 transition text-center";
+    btn.className = "w-full p-2 text-left text-white hover:bg-neutral-700 transition text-center";
     btn.addEventListener("click", () => {
       // Update URL without reload
       const newUrl = `?page=${item.page}`;

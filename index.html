@@ -20,9 +20,9 @@
     <script src="assets/script.js"></script>
     <title>Employee Time In Out System</title>
   </head>
-  <body class="text-white" onload="onLoad();">
+  <body class="text-white bg-neutral-800" onload="onLoad();">
 
-    <div class="lg:flex flex-col lg:flex-row h-screen w-screen">
+    <div class="lg:flex flex-col lg:flex-row h-screen w-full">
       <!-- This acts like the navigation bar -->
       <div class="bg-neutral-900 lg:hidden p-4 flex justify-between">
         <span class="font-bold">ETIOS</span>
@@ -33,8 +33,8 @@
           </svg>
         </button>
       </div>
-      <section class="hidden lg:block lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8" id="navbar"></section>
-      <section class="h-full bg-neutral-800 basis-3/4 overflow-auto">
+      <section class="hidden lg:block lg:h-full bg-neutral-900 lg:basis-1/4 py-8" id="navbar"></section>
+      <section class="h-full lg:basis-3/4 overflow-auto">
         <div id="content"></div>
       </section>
     </div>
