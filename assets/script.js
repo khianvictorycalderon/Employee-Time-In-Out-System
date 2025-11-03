@@ -1,9 +1,9 @@
 function onLoad() {
   const buttons = [
-    { label: "Time In / Out", onclick: () => alert("Clicked Time In/Out") },
-    { label: "Logs", onclick: () => alert("Clicked Logs") },
-    { label: "Employees", onclick: () => alert("Clicked Employees") },
-    { label: "Credits", onclick: () => alert("Clicked Credits") },
+    { label: "Time In / Out", page: "time" },
+    { label: "Logs", page: "logs" },
+    { label: "Employees", page: "employees" },
+    { label: "Credits", page: "credits" },
   ];
 
   const navbar = document.getElementById("navbar");
