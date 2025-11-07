@@ -1,3 +1,6 @@
+// ================== PAGE LOADER ==================
+const validPages = ["time", "logs", "employees", "readme", "credits"];
+
 function loadPage(page) {
   const content = document.getElementById("content");
 
@@ -6,7 +9,7 @@ function loadPage(page) {
     case "employees": content.innerHTML = pageEmployeesContent; break;
     case "readme": content.innerHTML = pageReadMeContent; break;
     case "credits": content.innerHTML = pageCreditsContent; break;
-    case "time": content.innerHTML = pageTimeInOutContent;
+    default: content.innerHTML = pageTimeInOutContent;
   }
 
   if (window.innerWidth < 1024) {
@@ -19,37 +22,50 @@ function loadPage(page) {
   }
 }
 
-const buttons = [
-        { label: "Time In / Out", page: "time" },
-        { label: "Logs", page: "logs" },
-        { label: "Employees", page: "employees" },
-        { label: "Read Me", page: "readme" },
-        { label: "Credits", page: "credits" },
-    ];
+// ================== INITIAL PAGE HANDLING ==================
+function initPages() {
+  const params = new URLSearchParams(window.location.search);
+  let currentPage = params.get("page");
 
-    const navbar = document.getElementById("navbar");
-    navbar.innerHTML = "";
+  // Redirect to ?page=time if empty or invalid
+  if (!validPages.includes(currentPage)) {
+    window.location.replace("?page=time");
+    return; // stop execution until redirect
+  }
 
-    buttons.forEach(item => {
+  loadPage(currentPage);
+
+  // Setup navbar buttons
+  const navbar = document.getElementById("navbar");
+  navbar.innerHTML = "";
+  const buttons = [
+    { label: "Time In / Out", page: "time" },
+    { label: "Logs", page: "logs" },
+    { label: "Employees", page: "employees" },
+    { label: "Read Me", page: "readme" },
+    { label: "Credits", page: "credits" },
+  ];
+
+  buttons.forEach(item => {
     const btn = document.createElement("button");
     btn.textContent = item.label;
     btn.dataset.page = item.page;
     btn.className = "w-full p-2 text-left text-white hover:bg-neutral-700 transition text-center";
     btn.addEventListener("click", () => {
-        history.pushState({ page: item.page }, "", `?page=${item.page}`);
-        loadPage(item.page);
-        highlightActiveButton(item.page);
+      history.pushState({ page: item.page }, "", `?page=${item.page}`);
+      loadPage(item.page);
+      highlightActiveButton(item.page);
     });
     navbar.appendChild(btn);
-    });
+  });
 
-    const params = new URLSearchParams(window.location.search);
-    const currentPage = params.get("page") || "time";
-    loadPage(currentPage);
-    highlightActiveButton(currentPage);
+  highlightActiveButton(currentPage);
 
-    window.addEventListener("popstate", e => {
+  window.addEventListener("popstate", e => {
     const page = e.state?.page || new URLSearchParams(window.location.search).get("page");
     loadPage(page);
     highlightActiveButton(page);
-});
+  });
+}
+
+window.onload = initPages;
