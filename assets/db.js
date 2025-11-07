@@ -1,69 +1,21 @@
-const DB_NAME = "ETIOS_DB";
-const DB_VERSION = 1;
 let db;
+const DB_NAME = "ETIOSDB";
+const EMPLOYEE_STORE = "Employees";
+const LOGS_STORE = "Logs";
 
-// Initialize IndexedDB
-function initDB() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
+const request = indexedDB.open(DB_NAME, 1);
 
-    request.onupgradeneeded = (event) => {
-      db = event.target.result;
+request.onupgradeneeded = (event) => {
+    db = event.target.result;
+    db.createObjectStore(EMPLOYEE_STORE, { keyPath: "employee_id", autoIncrement: false} );
+    db.createObjectStore(LOGS_STORE, { keyPath: "log_id", autoIncrement: true} );
+};
 
-      if (!db.objectStoreNames.contains("employees")) {
-        db.createObjectStore("employees", { keyPath: "id" });
-      }
+request.onsuccess = (event) => {
+    db = event.target.result;
+    alert("Successfully connected to database!");
+};
 
-      if (!db.objectStoreNames.contains("logs")) {
-        const logsStore = db.createObjectStore("logs", { keyPath: "id", autoIncrement: true });
-        logsStore.createIndex("employeeId", "employeeId", { unique: false });
-        logsStore.createIndex("dateTime", "dateTime", { unique: false });
-      }
-    };
-
-    request.onsuccess = (event) => {
-      db = event.target.result;
-      resolve(db);
-    };
-
-    request.onerror = (event) => reject(event.target.error);
-  });
-}
-
-// Employee operations
-async function addEmployee(employee) {
-  const tx = db.transaction("employees", "readwrite");
-  const store = tx.objectStore("employees");
-  return store.put(employee); // put = add or update
-}
-
-async function getAllEmployees() {
-  const tx = db.transaction("employees", "readonly");
-  const store = tx.objectStore("employees");
-  return store.getAll();
-}
-
-async function deleteEmployee(id) {
-  const tx = db.transaction("employees", "readwrite");
-  const store = tx.objectStore("employees");
-  return store.delete(id);
-}
-
-// Log operations
-async function addLog(log) {
-  const tx = db.transaction("logs", "readwrite");
-  const store = tx.objectStore("logs");
-  return store.add(log);
-}
-
-async function getLogs() {
-  const tx = db.transaction("logs", "readonly");
-  const store = tx.objectStore("logs");
-  return store.getAll();
-}
-
-async function clearLogs() {
-  const tx = db.transaction("logs", "readwrite");
-  const store = tx.objectStore("logs");
-  return store.clear();
+request.onerror = (event) => {
+    alert(`Failed to connect to database: ${event.target.error}`);
 }
