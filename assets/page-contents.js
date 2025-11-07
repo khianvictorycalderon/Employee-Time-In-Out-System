@@ -29,7 +29,7 @@ const pageLogsContent = `
     <button onclick="exportLogsCSV()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
     <button onclick="exportLogsJSON()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
     <button onclick="importLogs()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Logs</button>
-    <button onclick="clearLogs()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Clear Logs</button>
+    <button onclick="clearLogsUI()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Clear Logs</button>
   </div>
 
   <div class="overflow-x-auto bg-white/10 backdrop-blur-md shadow-md">

@@ -144,3 +144,112 @@ function parseCsvRow(row) {
   cols.push(cur);
   return cols;
 }
+
+// ============================= LOGS FUNCTIONS ===========================
+async function exportLogsJSON() {
+  try {
+    const logs = await getAllLogs();
+    const employees = await getAllEmployees();
+
+    const exportData = logs.map(l => {
+      const emp = employees.find(e => String(e.employee_id) === String(l.employee_id));
+      return {
+        status: l.status,
+        employee_id: l.employee_id,
+        employee_name: emp ? emp.employee_name : "Unknown",
+        datetime: l.datetime // ISO string
+      };
+    });
+
+    const filename = `logs_${getTimestamp()}.json`;
+    downloadBlob(JSON.stringify(exportData, null, 2), filename, "application/json");
+  } catch (err) {
+    alert("Failed to export logs as JSON: " + (err?.message || err));
+  }
+}
+
+async function exportLogsCSV() {
+  try {
+    const logs = await getAllLogs();
+    const employees = await getAllEmployees();
+    const header = "status,employee_id,employee_name,time,date";
+
+    const rows = logs.map(l => {
+      const emp = employees.find(e => String(e.employee_id) === String(l.employee_id));
+      const name = emp ? emp.employee_name.replace(/"/g, '""') : "Unknown";
+
+      // Parse datetime to get human-readable time
+      const dt = new Date(l.datetime);
+      const pad = n => String(n).padStart(2, "0");
+      const hours24 = dt.getHours();
+      const hours12 = hours24 % 12 || 12;
+      const ampm = hours24 >= 12 ? "PM" : "AM";
+      const time = `${pad(hours12)}:${pad(dt.getMinutes())}:${pad(dt.getSeconds())} ${ampm}`;
+
+      return `${l.status},${l.employee_id},"${name}",${time},${l.datetime}`;
+    });
+
+    const csv = header + "\n" + rows.join("\n");
+    const filename = `logs_${getTimestamp()}.csv`;
+    downloadBlob(csv, filename, "text/csv");
+  } catch (err) {
+    alert("Failed to export logs as CSV: " + (err?.message || err));
+  }
+}
+
+async function importLogs() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".json,.csv,application/json,text/csv";
+
+  input.onchange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const ext = file.name.split(".").pop().toLowerCase();
+      let importedLogs = [];
+
+      if (ext === "json") {
+        const parsed = JSON.parse(text);
+        if (!Array.isArray(parsed)) throw new Error("Invalid JSON format.");
+        importedLogs = parsed.map(l => ({
+          status: l.status,
+          employee_id: String(l.employee_id),
+          employee_name: l.employee_name,
+          datetime: l.datetime // keep ISO string
+        }));
+      } else if (ext === "csv") {
+        const lines = text.split(/\r?\n/).filter(Boolean);
+        const header = lines[0].toLowerCase();
+        const startIndex = header.includes("status") ? 1 : 0;
+
+        for (let i = startIndex; i < lines.length; i++) {
+          const cols = parseCsvRow(lines[i]);
+          if (cols.length < 5) continue;
+          importedLogs.push({
+            status: cols[0].trim(),
+            employee_id: cols[1].trim(),
+            employee_name: cols[2].trim().replace(/^"|"$/g, ""),
+            datetime: cols[4].trim() // use the ISO string column
+          });
+        }
+      } else {
+        throw new Error("Unsupported file type.");
+      }
+
+      // Add imported logs to IndexedDB
+      for (const log of importedLogs) {
+        await addLog(log); // autoIncrement ID ensures uniqueness
+      }
+
+      await renderLogs(); // refresh table
+      alert(`Imported ${importedLogs.length} logs successfully.`);
+    } catch (err) {
+      alert("Failed to import logs: " + (err?.message || err));
+    }
+  };
+
+  input.click();
+}

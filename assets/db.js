@@ -163,7 +163,6 @@ async function timeInOut(event) {
 
   const employees = await getAllEmployees();
   const employee = employees.find(e => String(e.employee_id) === empId);
-
   if (!employee) {
     alert("Employee not found. Please check the ID.");
     return;
@@ -173,22 +172,18 @@ async function timeInOut(event) {
   const lastLog = logs[logs.length - 1];
   const newStatus = (!lastLog || lastLog.status === "Out") ? "In" : "Out";
 
-  // Format date/time
+  // Store current timestamp as ISO string
   const now = new Date();
-  const pad = (n) => String(n).padStart(2, "0");
-  const hours24 = now.getHours();
-  const hours12 = hours24 % 12 || 12;
-  const ampm = hours24 >= 12 ? "PM" : "AM";
-  const time = `${pad(hours12)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${ampm}`;
+  const isoDateTime = now.toISOString(); // "2025-11-07T13:10:40.123Z"
 
-  // Use human-readable date format
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  const date = now.toLocaleDateString("en-US", options);
-
-  const newLog = { status: newStatus, employee_id: empId, time, date };
+  const newLog = { status: newStatus, employee_id: empId, datetime: isoDateTime };
   await addLog(newLog);
 
-  alert(`${employee.employee_name} has timed ${newStatus} at ${time} on ${date}.`);
+  // Display human-readable format
+  const displayDate = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  const displayTime = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+
+  alert(`${employee.employee_name} has timed ${newStatus} at ${displayTime} on ${displayDate}.`);
   empIdInput.value = "";
 }
 
@@ -224,15 +219,36 @@ async function renderLogs() {
 
   logs.forEach(log => {
     const row = document.createElement("tr");
-
     const emp = employees.find(e => String(e.employee_id) === String(log.employee_id));
+    const name = emp ? emp.employee_name : "(Deleted Employee)";
+
+    const d = new Date(log.datetime);
+    const displayDate = d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    const displayTime = d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
 
     row.innerHTML = `
       <td class="py-2 px-4">${log.status}</td>
-      <td class="py-2 px-4">${emp ? emp.employee_name : "(Deleted Employee)"}</td>
-      <td class="py-2 px-4">${log.time}</td>
-      <td class="py-2 px-4">${log.date}</td>
+      <td class="py-2 px-4">${name}</td>
+      <td class="py-2 px-4">${displayTime}</td>
+      <td class="py-2 px-4">${displayDate}</td>
     `;
     container.appendChild(row);
   });
+}
+
+async function clearLogs() {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(LOGS_STORE, "readwrite");
+    const store = tx.objectStore(LOGS_STORE);
+    const req = store.clear(); // remove all entries
+    req.onsuccess = () => resolve(true);
+    req.onerror = (e) => reject(e);
+  });
+}
+
+async function clearLogsUI() {
+  if (!confirm("Are you sure you want to clear all logs? This cannot be undone!")) return;
+  await clearLogs();
+  await renderLogs(); // refresh the table
+  alert("All logs have been cleared.");
 }
