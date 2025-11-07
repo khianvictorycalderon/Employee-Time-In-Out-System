@@ -84,50 +84,46 @@ const pageReadMeContent = `
 <section class="max-w-4xl mx-auto p-6 text-gray-200 space-y-6">
   <h2 class="text-3xl font-bold text-center text-white mb-4">📖 ETIOS - How to Use & Stay Safe</h2>
 
+  <p class="text-gray-300 mb-4 text-center italic">
+    Updated on November 7, 2025, 2:00 PM — migrated from localStorage to IndexedDB for more reliable local storage.
+  </p>
+
   <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-4">
     <h3 class="text-xl font-semibold text-blue-400">✅ What ETIOS Can Do</h3>
     <ul class="list-disc list-inside space-y-1 text-gray-100">
-      <li>Keep track of when employees clock in and out.</li>
-      <li>Manage your employee list: add new employees, edit their info, or delete them.</li>
-      <li>Import and export employee lists and logs using simple files (CSV or JSON).</li>
-      <li>When importing, new information is added or updated automatically — it won't replace everything.</li>
-      <li>You can clear just the logs, or all the ETIOS data, with a click.</li>
-      <li>Modern and easy-to-use interface that works on desktop and mobile devices.</li>
-      <li>All data is stored locally in your browser; nothing is sent online.</li>
+      <li>Allow employees to log their time In and Out easily using their Employee ID.</li>
+      <li>View and manage employee records (add, edit, delete).</li>
+      <li>View, export, and import time logs in CSV or JSON format.</li>
+      <li>Clear all logs or reset the database when needed.</li>
     </ul>
   </div>
 
   <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-4">
     <h3 class="text-xl font-semibold text-blue-400">⚠️ Important Things to Remember</h3>
     <ul class="list-disc list-inside space-y-1 text-gray-100">
-      <li><strong>Backup Your Data Often:</strong> Before making big changes, export your employee list and logs. This prevents accidental data loss.</li>
-      <li><strong>Importing Data:</strong> When you import employees or logs, ETIOS will merge the data into what you already have. Logs are automatically sorted by date and time.</li>
-      <li><strong>Data Storage Limit:</strong> Your browser can only store about 5MB of data (~25,000-30,000 log entries). Delete old logs if you reach the limit.</li>
-      <li><strong>Clearing Data:</strong> If you click "Clear Logs," only the logs and active sessions are removed. If you click "Clear All Data," everything is erased. <strong>Do NOT clear your browser’s data manually!</strong> Always export first if you want to save your data.</li>
-      <li><strong>Employee IDs:</strong> Each employee must have a unique ID. Duplicates can cause errors in logs.</li>
-      <li><strong>Browser Storage:</strong> Your data is saved per browser. If you switch devices, export your data and import it into the new device.</li>
+      <li>This system stores data locally in your browser. Other devices will not see this data.</li>
+      <li>Clearing your browser or IndexedDB will erase all data. Always export important logs or employee data before doing so.</li>
+      <li>Do not share Employee IDs with unauthorized persons.</li>
     </ul>
   </div>
 
   <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-4">
     <h3 class="text-xl font-semibold text-blue-400">💡 Best Practices</h3>
     <ul class="list-disc list-inside space-y-1 text-gray-100">
-      <li>Export employees and logs regularly as a backup.</li>
-      <li>Check that employee IDs are unique to keep logs accurate.</li>
-      <li>Clear old logs to stay within browser storage limits, but always export first.</li>
-      <li>Review imported data carefully to avoid duplicates or mistakes.</li>
-      <li>Use a modern browser (Chrome, Firefox, Edge) for best experience.</li>
-      <li>If you ever need to start fresh, export your data, then use "Clear All Data," and finally import your backup.</li>
+      <li>Regularly export logs and employee data for backup.</li>
+      <li>Only allow trusted personnel to access the system on a shared device.</li>
+      <li>Use clear, consistent Employee IDs to avoid duplicates.</li>
+      <li>Always log out or close the browser when not in use if on a shared computer.</li>
     </ul>
   </div>
 
   <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-4">
     <h3 class="text-xl font-semibold text-blue-400">🛠️ Quick Tips</h3>
     <ul class="list-disc list-inside space-y-1 text-gray-100">
-      <li>Always back up before making large changes.</li>
-      <li>Use the "Clear Logs" button instead of manually deleting browser data.</li>
-      <li>Merging imports keeps your data intact — you don't lose anything.</li>
-      <li>Keep your browser updated for the best compatibility and security.</li>
+      <li>Click “Export CSV/JSON” to save backups of employees or logs.</li>
+      <li>Click “Import” to restore or add data from previous backups.</li>
+      <li>Use the “Clear All Data” button only if you are sure you want to reset everything.</li>
+      <li>If a log or employee seems missing, refresh the page to reload data from IndexedDB.</li>
     </ul>
   </div>
 </section>
