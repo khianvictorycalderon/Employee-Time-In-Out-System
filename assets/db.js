@@ -145,7 +145,7 @@ async function getAllLogsByEmployee(employeeId) {
     const request = store.getAll();
     request.onsuccess = () => {
       const allLogs = request.result.filter(l => String(l.employee_id) === String(employeeId));
-      resolve(allLogs.sort((a, b) => a.log_id - b.log_id));
+      resolve(allLogs.sort((a, b) => b.log_id - a.log_id));
     };
     request.onerror = () => reject(request.error);
   });
@@ -196,7 +196,7 @@ async function getAllLogs() {
     const store = tx.objectStore(LOGS_STORE);
     const request = store.getAll();
     request.onsuccess = () => {
-      const logs = request.result.sort((a, b) => a.log_id - b.log_id);
+      const logs = request.result.sort((a, b) => b.log_id - a.log_id);
       resolve(logs);
     };
     request.onerror = () => reject(request.error);
