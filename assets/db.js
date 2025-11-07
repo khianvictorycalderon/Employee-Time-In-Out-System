@@ -252,3 +252,34 @@ async function clearLogsUI() {
   await renderLogs(); // refresh the table
   alert("All logs have been cleared.");
 }
+
+// ========================= CLEAR DATABASE ===========================
+
+async function clearDatabase() {
+  
+  if(confirm("Are you sure you want to erase everything?")) {
+
+    try {
+      if(db) db.close(); // Close connections first
+      const req = indexedDB.deleteDatabase(DB_NAME);
+
+      req.onsuccess = () => {
+        alert("Successfully cleared database!");
+        window.location.reload(); // Simplest way of reflecting everything
+      };
+
+      req.onerror = (event) => {
+        alert(`Error clearing database: ${event.target.error}`);
+      }
+
+      req.onblocked = () => {
+        alert("Database deletion blocked. Close all other tabs using this site and try again.");
+      }
+
+    } catch (e) {
+      alert(`Transaction error: ${e}`);
+    }
+
+  }
+
+}

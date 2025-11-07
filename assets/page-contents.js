@@ -163,7 +163,7 @@ const pageCreditsContent = `
     </p>
 
     <div class="pt-4 text-center">
-      <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200">
+      <button onclick="clearDatabase();" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200">
         🗑️ Clear All Data
       </button>
     </div>
