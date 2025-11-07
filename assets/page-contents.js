@@ -61,10 +61,10 @@ const pageEmployeesContent = `
   </div>
 
   <div class="bg-white/10 backdrop-blur-md shadow-md">
-    <div class="bg-white/20 grid grid-cols-2 md:grid-cols-3 gap-4 font-semibold text-gray-100 mb-4 p-6">
+    <div class="bg-white/20 grid grid-cols-2 md:grid-cols-3 gap-4 font-semibold text-gray-100 mb-4 px-6 py-2">
       <div>ID</div>
-      <div>Employee Name</div>
-      <div class="hidden md:block">Action</div>
+      <div>EMPLOYEE NAME</div>
+      <div class="hidden md:block">ACTION</div>
     </div>
 
     <div id="employeesContainer" class="space-y-3 px-6">
