@@ -3,6 +3,8 @@ const DB_NAME = "ETIOSDB";
 const EMPLOYEE_STORE = "Employees";
 const LOGS_STORE = "Logs";
 
+// Uncomment this to delete database temporarily
+// indexedDB.deleteDatabase(DB_NAME);
 const request = indexedDB.open(DB_NAME, 1);
 
 request.onupgradeneeded = (event) => {
@@ -122,4 +124,70 @@ async function addEmployeeUI() {
   idField.value = "";
   nameField.value = "";
   renderEmployees();
+}
+
+// TIME IN OUT
+
+async function addLog(log) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(LOGS_STORE, "readwrite");
+    const store = tx.objectStore(LOGS_STORE);
+    const req = store.add(log);
+    req.onsuccess = () => resolve(true);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function getAllLogsByEmployee(employeeId) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(LOGS_STORE, "readonly");
+    const store = tx.objectStore(LOGS_STORE);
+    const request = store.getAll();
+    request.onsuccess = () => {
+      const allLogs = request.result.filter(l => String(l.employee_id) === String(employeeId));
+      resolve(allLogs.sort((a, b) => a.log_id - b.log_id));
+    };
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function timeInOut(event) {
+  event.preventDefault();
+  const empIdInput = document.getElementById("employeeId");
+  const empId = empIdInput.value.trim();
+
+  if (!empId) {
+    alert("Please enter an Employee ID.");
+    return;
+  }
+
+  // Check if employee exists
+  const employees = await getAllEmployees();
+  const employee = employees.find(e => String(e.employee_id) === empId);
+
+  if (!employee) {
+    alert("Employee not found. Please check the ID.");
+    return;
+  }
+
+  // Get all logs for this employee to determine last status
+  const logs = await getAllLogsByEmployee(empId);
+  const lastLog = logs[logs.length - 1];
+  const newStatus = (!lastLog || lastLog.status === "Out") ? "In" : "Out";
+
+  // Format date/time
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  const hours24 = now.getHours();
+  const hours12 = hours24 % 12 || 12;
+  const ampm = hours24 >= 12 ? "PM" : "AM";
+  const time = `${pad(hours12)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${ampm}`;
+  const date = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}-${now.getFullYear()}`;
+
+  // Insert new log entry
+  const newLog = { status: newStatus, employee_id: empId, time, date };
+  await addLog(newLog);
+
+  alert(`${employee.employee_name} has timed ${newStatus} at ${time} on ${date}.`);
+  empIdInput.value = "";
 }

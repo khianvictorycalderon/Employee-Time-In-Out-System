@@ -1,7 +1,7 @@
 const pageTimeInOutContent = `
 <section class="p-6 max-w-md mx-auto text-center">
   <h1 class="text-3xl font-semibold mb-6">🕒 Time In / Out</h1>
-  <form id="timeForm" class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-6">
+  <form id="timeForm" onsubmit="timeInOut(event)" class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md space-y-6">
     <div class="space-y-3">
       <label for="employeeId" class="block text-lg font-medium text-gray-100">
         Employee ID
@@ -14,7 +14,7 @@ const pageTimeInOutContent = `
         class="w-full p-3 text-black rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
     </div>
-    <button type="button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl">
+    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl">
       Log
     </button>
   </form>
