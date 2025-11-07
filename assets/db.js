@@ -193,3 +193,46 @@ async function timeInOut(event) {
 }
 
 // ================== LOGS FUNCTIONS ==================
+
+// Get all logs from IndexedDB
+async function getAllLogs() {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(LOGS_STORE, "readonly");
+    const store = tx.objectStore(LOGS_STORE);
+    const request = store.getAll();
+    request.onsuccess = () => {
+      const logs = request.result.sort((a, b) => a.log_id - b.log_id);
+      resolve(logs);
+    };
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function renderLogs() {
+  const container = document.getElementById("logsContainer");
+  if (!container) return;
+
+  const logs = await getAllLogs();
+  container.innerHTML = "";
+
+  if (!logs.length) {
+    container.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-400">No logs available</td></tr>`;
+    return;
+  }
+
+  const employees = await getAllEmployees();
+
+  logs.forEach(log => {
+    const row = document.createElement("tr");
+
+    const emp = employees.find(e => String(e.employee_id) === String(log.employee_id));
+
+    row.innerHTML = `
+      <td class="py-2 px-4">${log.status}</td>
+      <td class="py-2 px-4">${emp ? emp.employee_name : "Unknown"}</td>
+      <td class="py-2 px-4">${log.time}</td>
+      <td class="py-2 px-4">${log.date}</td>
+    `;
+    container.appendChild(row);
+  });
+}

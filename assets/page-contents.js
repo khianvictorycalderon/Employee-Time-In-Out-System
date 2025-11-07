@@ -26,10 +26,10 @@ const pageLogsContent = `
   <h2 class="text-3xl font-semibold mb-4 text-center">🗂 Logs</h2>
 
   <div class="flex justify-center flex-wrap gap-4 mb-6">
-    <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
-    <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
-    <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Logs</button>
-    <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Clear Logs</button>
+    <button onclick="exportLogsCSV()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
+    <button onclick="exportLogsJSON()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
+    <button onclick="importLogs()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Logs</button>
+    <button onclick="clearLogs()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Clear Logs</button>
   </div>
 
   <div class="overflow-x-auto bg-white/10 backdrop-blur-md shadow-md">
@@ -42,10 +42,8 @@ const pageLogsContent = `
           <th class="py-3 px-4 text-sm font-semibold uppercase tracking-wide">Date</th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-white/10 text-gray-200">
-        <tr>
-          <td colspan="4" class="text-center py-4 text-gray-400">Logs table (UI only)</td>
-        </tr>
+      <tbody id="logsContainer" class="divide-y divide-white/10 text-gray-200">
+        <!-- Logs will be rendered here dynamically -->
       </tbody>
     </table>
   </div>

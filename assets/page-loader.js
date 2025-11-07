@@ -12,6 +12,7 @@ async function loadPage(page) {
 
     case "logs":
       content.innerHTML = pageLogsContent;
+      await renderLogs(); // dynamically populate logs
       break;
 
     case "readme":
