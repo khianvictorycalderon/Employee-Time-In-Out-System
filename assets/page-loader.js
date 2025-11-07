@@ -1,17 +1,32 @@
 // ================== PAGE LOADER ==================
 const validPages = ["time", "logs", "employees", "readme", "credits"];
 
-function loadPage(page) {
+async function loadPage(page) {
   const content = document.getElementById("content");
 
   switch (page) {
-    case "logs": content.innerHTML = pageLogsContent; break;
-    case "employees": content.innerHTML = pageEmployeesContent; break;
-    case "readme": content.innerHTML = pageReadMeContent; break;
-    case "credits": content.innerHTML = pageCreditsContent; break;
-    default: content.innerHTML = pageTimeInOutContent;
+    case "employees":
+      content.innerHTML = pageEmployeesContent;
+      await renderEmployees(); // Load employees once the page is displayed
+      break;
+
+    case "logs":
+      content.innerHTML = pageLogsContent;
+      break;
+
+    case "readme":
+      content.innerHTML = pageReadMeContent;
+      break;
+
+    case "credits":
+      content.innerHTML = pageCreditsContent;
+      break;
+
+    default:
+      content.innerHTML = pageTimeInOutContent;
   }
 
+  // collapse mobile navbar if needed
   if (window.innerWidth < 1024) {
     document.getElementById("navbar").className =
       "hidden lg:hidden lg:h-full bg-neutral-900 basis-1/4 overflow-auto py-8 fixed w-full";

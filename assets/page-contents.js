@@ -70,24 +70,18 @@ const pageEmployeesContent = `
     </div>
 
     <div id="employeesContainer" class="space-y-3 px-6">
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
-        <input class="" type="text" />
-        <input class="" type="text" />
-        <button class="bg-red-500 px-4 py-2 rounded">Delete</button>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
-        <input class="" type="text" />
-        <input class="" type="text" />
-        <button class="bg-red-500 px-4 py-2 rounded">Delete</button>
-      </div>
+      <!-- Employee rows rendered here -->
     </div>
 
-    <div class="flex justify-center gap-4 mt-6 flex-wrap">
-      <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md mb-6">Add</button>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center px-6 py-4 border-t border-white/10">
+      <input id="newEmpId" type="text" placeholder="New ID..." class="p-2 rounded text-black w-full" />
+      <input id="newEmpName" type="text" placeholder="New Name..." class="p-2 rounded text-black w-full" />
+      <button onclick="addEmployeeUI()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md">Add</button>
     </div>
   </div>
 </section>
 `;
+
 
 const pageReadMeContent = `
 <section class="max-w-4xl mx-auto p-6 text-gray-200 space-y-6">
