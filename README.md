@@ -3,13 +3,15 @@
 
 A web version of my [Python Employee Time In Out System Desktop Application](https://github.com/khianvictorycalderon/Employee-Time-In-Out-System-Desktop).
 
-This system allows small offices or demo environments to track employee attendance easily. All data is stored **locally in your browser**, so no server or database is required.
+**Note:** Updated on November 7, 2025 — this web version migrated from `localStorage` to **IndexedDB** for more reliable local storage. All data is still stored **locally in your browser**, so no server or online database is required.
+
+This system allows small offices or demo environments to track employee attendance easily.
 
 ---
 
 ## 📌 Getting Started (For Users)
 
-1. Open `index.html` in a modern web browser (Chrome, Firefox, Edge).
+1. Open `index.html` in a modern web browser (Chrome, Firefox, Edge).  
 2. Navigate the menu to access:
    - **Time In / Out** – Employees can log their attendance.
    - **Logs** – View, export, or import attendance logs.
@@ -17,9 +19,9 @@ This system allows small offices or demo environments to track employee attendan
    - **Read Me** – Learn how to use ETIOS safely.
    - **Credits** – Developer info and clear all data if needed.
 3. Data Management:
-   - Export employee lists and logs as `.csv` or `.json` files.
+   - Export employee lists and logs as `.csv` or `.json` files for backup.
    - Import previously exported data to merge with current records.
-   - Clear only logs or all data as needed, but always backup first.
+   - Clear only logs or all data as needed, but always back up first.
 
 ---
 
@@ -29,7 +31,7 @@ This system allows small offices or demo environments to track employee attendan
 - 🗂 **View Logs** – Review past logs sorted by date and time.
 - 👥 **Employee Management** – Add, edit, or remove employees.
 - 💾 **Export & Import** – Use `.csv` or `.json` for backups.
-- 🔒 **Local Storage** – Data is stored in the browser, nothing is sent online.
+- 🔒 **Local Browser Storage** – Data is stored using **IndexedDB**, not sent online.
 - 📱 **Responsive Design** – Works on both desktop and mobile devices.
 - ⚠️ **Safety Tips**:
   - Back up regularly before importing or clearing data.
@@ -48,7 +50,7 @@ This system allows small offices or demo environments to track employee attendan
 
 - **Built With:** HTML, Tailwind CSS, Vanilla JavaScript.
 - **Dynamic Content:** Each page (Time In/Out, Logs, Employees, Read Me, Credits) is loaded dynamically using JavaScript template strings.
-- **Storage:** Data is managed with `localStorage` and JSON.
+- **Storage:** Data is managed with **IndexedDB** for reliable local persistence.
 - **Exports/Imports:** Handles CSV and JSON formats with automatic merging and sorting.
 - **Responsive Navbar:** Supports desktop and mobile menus with active button highlighting.
 - **Source Code:** [GitHub Repository](https://github.com/khianvictorycalderon/Employee-Time-In-Out-System-Desktop)
@@ -58,9 +60,10 @@ This system allows small offices or demo environments to track employee attendan
 ## ⚙️ Notes for Developers
 
 - JavaScript functions are modular:
-  - `getLocalData` / `saveLocalData` – Safe localStorage operations.
-  - `renderLogsTable` / `renderEmployeesList` – Updates DOM dynamically.
-  - `bindTimeForm` / `bindEmployeeEvents` – Handles forms and events.
-  - `toCSV` / `downloadFile` / `importFile` – File management utilities.
+  - `addEmployee` / `getAllEmployees` / `deleteEmployee` – Handles employee records in IndexedDB.
+  - `addLog` / `getAllLogs` – Handles time logs storage and retrieval.
+  - `renderLogs` / `renderEmployees` – Updates DOM dynamically.
+  - `exportLogsCSV` / `exportLogsJSON` / `importLogs` – File management utilities.
 - Navigation uses **History API** to maintain browser URLs without page reload.
 - All logs are linked to employee names; deleted employees are labeled `(Deleted Employee)`.
+- Migration from localStorage ensures existing user workflows remain consistent while improving data reliability.
