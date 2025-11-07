@@ -126,7 +126,7 @@ async function addEmployeeUI() {
   renderEmployees();
 }
 
-// TIME IN OUT
+// ================== TIME IN AND OUT FUNCTIONS ==================
 
 async function addLog(log) {
   return new Promise((resolve, reject) => {
@@ -191,3 +191,5 @@ async function timeInOut(event) {
   alert(`${employee.employee_name} has timed ${newStatus} at ${time} on ${date}.`);
   empIdInput.value = "";
 }
+
+// ================== LOGS FUNCTIONS ==================
