@@ -1,0 +1,135 @@
+// utility.js
+// Requires: getAllEmployees(), addEmployee() from db.js
+
+// ---------- HELPERS ----------
+async function addEmployeeIfNotExists(employee) {
+  const all = await getAllEmployees();
+  const exists = all.some(e => String(e.employee_id) === String(employee.employee_id));
+  if (exists) return false; // duplicate, skip
+  await addEmployee(employee);
+  return true;
+}
+
+function downloadBlob(content, filename, mimeType) {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ---------- EXPORT ----------
+async function exportEmployeesJSON() {
+  try {
+    const employees = await getAllEmployees();
+    const content = JSON.stringify(employees, null, 2);
+    downloadBlob(content, "employees.json", "application/json");
+  } catch (err) {
+    alert("Failed to export JSON: " + (err?.message || err));
+  }
+}
+
+async function exportEmployeesCSV() {
+  try {
+    const employees = await getAllEmployees();
+    if (!employees.length) {
+      alert("No employees to export.");
+      return;
+    }
+
+    const header = "employee_id,employee_name";
+    const rows = employees.map(e => {
+      const id = String(e.employee_id).replace(/"/g, '""');
+      const name = String(e.employee_name).replace(/"/g, '""');
+      return `${id.includes(",") ? `"${id}"` : id},${name.includes(",") ? `"${name}"` : name}`;
+    });
+    const csv = header + "\n" + rows.join("\n");
+    downloadBlob(csv, "employees.csv", "text/csv");
+  } catch (err) {
+    alert("Failed to export CSV: " + (err?.message || err));
+  }
+}
+
+// ---------- UNIVERSAL IMPORT ----------
+async function importEmployees() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".json,.csv,application/json,text/csv";
+
+  input.onchange = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const ext = file.name.split(".").pop().toLowerCase();
+      let employees = [];
+
+      if (ext === "json") {
+        // Parse JSON
+        const parsed = JSON.parse(text);
+        if (!Array.isArray(parsed)) throw new Error("Invalid JSON format.");
+        employees = parsed.map(e => ({
+          employee_id: String(e.employee_id ?? e.id ?? "").trim(),
+          employee_name: String(e.employee_name ?? e.name ?? "").trim()
+        })).filter(e => e.employee_id && e.employee_name);
+
+      } else if (ext === "csv") {
+        // Parse CSV
+        const lines = text.split(/\r?\n/).filter(Boolean);
+        if (lines.length <= 1) throw new Error("CSV file is empty or missing data.");
+        const header = lines[0].toLowerCase();
+        const startIndex = header.includes("employee_id") ? 1 : 0;
+
+        for (let i = startIndex; i < lines.length; i++) {
+          const cols = parseCsvRow(lines[i]);
+          const id = cols[0]?.trim().replace(/^"|"$/g, "");
+          const name = cols[1]?.trim().replace(/^"|"$/g, "");
+          if (id && name) employees.push({ employee_id: id, employee_name: name });
+        }
+      } else {
+        throw new Error("Unsupported file type.");
+      }
+
+      let added = 0, skipped = 0;
+      for (const emp of employees) {
+        const ok = await addEmployeeIfNotExists(emp);
+        ok ? added++ : skipped++;
+      }
+
+      await renderEmployees?.();
+      alert(`Import complete — added: ${added}, skipped (duplicates/bad rows): ${skipped}`);
+    } catch (err) {
+      alert("Failed to import employees: " + (err?.message || err));
+    }
+  };
+
+  input.click();
+}
+
+// ---------- CSV PARSER ----------
+function parseCsvRow(row) {
+  const cols = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < row.length; i++) {
+    const ch = row[i];
+    if (ch === '"') {
+      if (inQuotes && row[i + 1] === '"') {
+        cur += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (ch === "," && !inQuotes) {
+      cols.push(cur);
+      cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  cols.push(cur);
+  return cols;
+}

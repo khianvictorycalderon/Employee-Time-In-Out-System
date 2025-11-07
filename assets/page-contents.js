@@ -57,9 +57,9 @@ const pageEmployeesContent = `
   <h2 class="text-3xl font-semibold mb-4 text-center">👥 Employees</h2>
 
   <div class="flex justify-center flex-wrap gap-4 mb-6">
-    <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
-    <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
-    <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Employees</button>
+    <button onclick="exportEmployeesCSV()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
+    <button onclick="exportEmployeesJSON()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
+    <button onclick="importEmployees()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Employees</button>
   </div>
 
   <div class="bg-white/10 backdrop-blur-md shadow-md">
@@ -81,7 +81,6 @@ const pageEmployeesContent = `
   </div>
 </section>
 `;
-
 
 const pageReadMeContent = `
 <section class="max-w-4xl mx-auto p-6 text-gray-200 space-y-6">
