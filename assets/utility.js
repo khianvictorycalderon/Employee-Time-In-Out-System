@@ -10,6 +10,14 @@ async function addEmployeeIfNotExists(employee) {
   return true;
 }
 
+function getTimestamp() {
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  const date = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}-${now.getFullYear()}`;
+  const time = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+  return `${date}_${time}`;
+}
+
 function downloadBlob(content, filename, mimeType) {
   const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
@@ -25,7 +33,8 @@ async function exportEmployeesJSON() {
   try {
     const employees = await getAllEmployees();
     const content = JSON.stringify(employees, null, 2);
-    downloadBlob(content, "employees.json", "application/json");
+    const filename = `employees_${getTimestamp()}.json`;
+    downloadBlob(content, filename, "application/json");
   } catch (err) {
     alert("Failed to export JSON: " + (err?.message || err));
   }
@@ -46,7 +55,9 @@ async function exportEmployeesCSV() {
       return `${id.includes(",") ? `"${id}"` : id},${name.includes(",") ? `"${name}"` : name}`;
     });
     const csv = header + "\n" + rows.join("\n");
-    downloadBlob(csv, "employees.csv", "text/csv");
+
+    const filename = `employees_${getTimestamp()}.csv`;
+    downloadBlob(csv, filename, "text/csv");
   } catch (err) {
     alert("Failed to export CSV: " + (err?.message || err));
   }
