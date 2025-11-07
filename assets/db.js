@@ -229,7 +229,7 @@ async function renderLogs() {
 
     row.innerHTML = `
       <td class="py-2 px-4">${log.status}</td>
-      <td class="py-2 px-4">${emp ? emp.employee_name : "Unknown"}</td>
+      <td class="py-2 px-4">${emp ? emp.employee_name : "(Deleted Employee)"}</td>
       <td class="py-2 px-4">${log.time}</td>
       <td class="py-2 px-4">${log.date}</td>
     `;
