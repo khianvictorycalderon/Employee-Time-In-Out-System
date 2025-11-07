@@ -32,7 +32,7 @@ const pageLogsContent = `
     <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Clear Logs</button>
   </div>
 
-  <div class="overflow-x-auto bg-white/10 backdrop-blur-md rounded-2xl shadow-md">
+  <div class="overflow-x-auto bg-white/10 backdrop-blur-md shadow-md">
     <table class="w-full text-left border-collapse">
       <thead class="bg-white/20 text-gray-100">
         <tr>
@@ -62,23 +62,28 @@ const pageEmployeesContent = `
     <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md">Import Employees</button>
   </div>
 
-  <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md">
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 font-semibold text-gray-100 mb-4">
+  <div class="bg-white/10 backdrop-blur-md shadow-md">
+    <div class="bg-white/20 grid grid-cols-2 md:grid-cols-3 gap-4 font-semibold text-gray-100 mb-4 p-6">
       <div>ID</div>
       <div>Employee Name</div>
-      <div class="hidden md:block"></div>
+      <div class="hidden md:block">Action</div>
     </div>
 
-    <div id="employeesContainer" class="space-y-3">
+    <div id="employeesContainer" class="space-y-3 px-6">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
-        <input type="text" value="" class="p-2 rounded text-black w-full emp-id" placeholder="ID"/>
-        <input type="text" value="" class="p-2 rounded text-black w-full emp-name" placeholder="Name"/>
-        <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md">Delete</button>
+        <input class="" type="text" />
+        <input class="" type="text" />
+        <button class="bg-red-500 px-4 py-2 rounded">Delete</button>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center">
+        <input class="" type="text" />
+        <input class="" type="text" />
+        <button class="bg-red-500 px-4 py-2 rounded">Delete</button>
       </div>
     </div>
 
     <div class="flex justify-center gap-4 mt-6 flex-wrap">
-      <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md">Add</button>
+      <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md mb-6">Add</button>
     </div>
   </div>
 </section>

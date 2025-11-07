@@ -19,3 +19,11 @@ request.onsuccess = (event) => {
 request.onerror = (event) => {
     alert(`Failed to connect to database: ${event.target.error}`);
 }
+
+async function addEmployee() {
+
+}
+
+async function getAllEmployees() {
+    
+}
