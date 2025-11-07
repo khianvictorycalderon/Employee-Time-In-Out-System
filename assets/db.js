@@ -161,7 +161,6 @@ async function timeInOut(event) {
     return;
   }
 
-  // Check if employee exists
   const employees = await getAllEmployees();
   const employee = employees.find(e => String(e.employee_id) === empId);
 
@@ -170,7 +169,6 @@ async function timeInOut(event) {
     return;
   }
 
-  // Get all logs for this employee to determine last status
   const logs = await getAllLogsByEmployee(empId);
   const lastLog = logs[logs.length - 1];
   const newStatus = (!lastLog || lastLog.status === "Out") ? "In" : "Out";
@@ -182,9 +180,11 @@ async function timeInOut(event) {
   const hours12 = hours24 % 12 || 12;
   const ampm = hours24 >= 12 ? "PM" : "AM";
   const time = `${pad(hours12)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ${ampm}`;
-  const date = `${pad(now.getMonth() + 1)}-${pad(now.getDate())}-${now.getFullYear()}`;
 
-  // Insert new log entry
+  // Use human-readable date format
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const date = now.toLocaleDateString("en-US", options);
+
   const newLog = { status: newStatus, employee_id: empId, time, date };
   await addLog(newLog);
 
