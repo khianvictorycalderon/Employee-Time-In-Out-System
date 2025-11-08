@@ -253,3 +253,63 @@ async function importLogs() {
 
   input.click();
 }
+
+function initLogsSearch() {
+  const searchInput = document.getElementById("logs-search-input");
+  const selectInput = document.getElementById("logs-select-input");
+  const caseInput = document.getElementById("logs-case-sensitive");
+  const wholeInput = document.getElementById("logs-whole-word");
+
+  [searchInput, selectInput, caseInput, wholeInput].forEach(el =>
+    el?.addEventListener("input", handleLogsSearch)
+  );
+}
+
+async function handleLogsSearch() {
+  const keyword = document.getElementById("logs-search-input").value.trim();
+  const field = document.getElementById("logs-select-input").value;
+  const caseSensitive = document.getElementById("logs-case-sensitive").checked;
+  const wholeWord = document.getElementById("logs-whole-word").checked;
+
+  const allLogs = await getAllLogs();
+  const employees = await getAllEmployees();
+
+  if (!keyword) {
+    renderLogs(allLogs);
+    return;
+  }
+
+  const filtered = allLogs.filter(log => {
+    const emp = employees.find(e => String(e.employee_id) === String(log.employee_id));
+    const name = emp ? emp.employee_name : "(Deleted Employee)";
+
+    const time = new Date(log.datetime).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+    const date = new Date(log.datetime).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+    const values = {
+      status: log.status,
+      employee_name: name,
+      time,
+      date
+    };
+
+    const searchValue = values[field === "default" ? "status" : field];
+    const searchIn = field === "default" ? Object.values(values) : [searchValue];
+
+    return searchIn.some(val => {
+      let valStr = String(val);
+      let searchStr = keyword;
+      if (!caseSensitive) {
+        valStr = valStr.toLowerCase();
+        searchStr = searchStr.toLowerCase();
+      }
+      if (wholeWord) {
+        const regex = new RegExp(`\\b${searchStr}\\b`);
+        return regex.test(valStr);
+      }
+      return valStr.includes(searchStr);
+    });
+  });
+
+  renderLogs(filtered);
+}

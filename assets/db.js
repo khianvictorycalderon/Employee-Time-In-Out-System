@@ -142,11 +142,21 @@ async function getAllLogsByEmployee(employeeId) {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(LOGS_STORE, "readonly");
     const store = tx.objectStore(LOGS_STORE);
+
     const request = store.getAll();
+
     request.onsuccess = () => {
-      const allLogs = request.result.filter(l => String(l.employee_id) === String(employeeId));
-      resolve(allLogs.sort((a, b) => b.log_id - a.log_id));
+      // Filter by employee ID
+      const filteredLogs = request.result.filter(
+        l => String(l.employee_id) === String(employeeId)
+      );
+
+      // Sort ascending by log_id (oldest first)
+      const sortedLogs = filteredLogs.sort((a, b) => a.log_id - b.log_id);
+
+      resolve(sortedLogs);
     };
+
     request.onerror = () => reject(request.error);
   });
 }
@@ -155,37 +165,25 @@ async function timeInOut(event) {
   event.preventDefault();
   const empIdInput = document.getElementById("employeeId");
   const empId = empIdInput.value.trim();
-
-  if (!empId) {
-    alert("Please enter an Employee ID.");
-    return;
-  }
+  if (!empId) return alert("Please enter an Employee ID.");
 
   const employees = await getAllEmployees();
   const employee = employees.find(e => String(e.employee_id) === empId);
-  if (!employee) {
-    alert("Employee not found. Please check the ID.");
-    return;
-  }
+  if (!employee) return alert("Employee not found.");
 
+  // Always get all logs, ignoring any filtered view
   const logs = await getAllLogsByEmployee(empId);
-  const lastLog = logs[logs.length - 1];
-  const newStatus = (!lastLog || lastLog.status === "Out") ? "In" : "Out";
+  const lastLog = logs[logs.length - 1]; // newest log
+  const newStatus = !lastLog || lastLog.status === "Out" ? "In" : "Out";
 
-  // Store current timestamp as ISO string
   const now = new Date();
-  const isoDateTime = now.toISOString(); // "2025-11-07T13:10:40.123Z"
-
-  const newLog = { status: newStatus, employee_id: empId, datetime: isoDateTime };
+  const newLog = { status: newStatus, employee_id: empId, datetime: now.toISOString() };
   await addLog(newLog);
 
-  // Display human-readable format
-  const displayDate = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  const displayTime = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
-
-  alert(`${employee.employee_name} has timed ${newStatus} at ${displayTime} on ${displayDate}.`);
+  alert(`${employee.employee_name} has timed ${newStatus} at ${now.toLocaleTimeString()} on ${now.toLocaleDateString()}.`);
   empIdInput.value = "";
 }
+
 
 // ================== LOGS FUNCTIONS ==================
 
@@ -203,11 +201,11 @@ async function getAllLogs() {
   });
 }
 
-async function renderLogs() {
+async function renderLogs(filteredLogs = null) {
   const container = document.getElementById("logsContainer");
   if (!container) return;
 
-  const logs = await getAllLogs();
+  const logs = filteredLogs || await getAllLogs();
   container.innerHTML = "";
 
   if (!logs.length) {

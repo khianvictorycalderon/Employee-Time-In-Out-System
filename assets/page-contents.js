@@ -25,6 +25,28 @@ const pageLogsContent = `
 <section class="max-w-5xl mx-auto p-6 text-gray-200">
   <h2 class="text-3xl font-semibold mb-4 text-center">🗂 Logs</h2>
 
+  <!-- Search Controls -->
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+    <input id="logs-search-input" type="text" placeholder="Search logs..." class="p-2 rounded w-full md:w-1/3 text-black" />
+    <select id="logs-select-input" class="p-2 rounded w-full md:w-1/4 text-black">
+      <option value="default">All Fields</option>
+      <option value="status">Status</option>
+      <option value="employee_name">Employee Name</option>
+      <option value="time">Time</option>
+      <option value="date">Date</option>
+    </select>
+
+    <div class="flex items-center gap-2">
+      <input id="logs-case-sensitive" type="checkbox" class="h-4 w-4 accent-blue-500" />
+      <label for="logs-case-sensitive" class="text-gray-200">Case Sensitive</label>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <input id="logs-whole-word" type="checkbox" class="h-4 w-4 accent-blue-500" />
+      <label for="logs-whole-word" class="text-gray-200">Whole Word Only</label>
+    </div>
+  </div>
+
   <div class="flex justify-center flex-wrap gap-4 mb-6">
     <button onclick="exportLogsCSV()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export CSV</button>
     <button onclick="exportLogsJSON()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md">Export JSON</button>
